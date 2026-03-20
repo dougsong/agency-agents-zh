@@ -15,7 +15,7 @@
 
 | 🤖 AI 智能体 | 🌏 英文版翻译 | 🇨🇳 中国市场原创 | 🧠 支持工具 | 🏢 部门 |
 |:---:|:---:|:---:|:---:|:---:|
-| **211** | **165** | **46** | **16 种** | **18 个** |
+| **211** | **165** | **46** | **17 种** | **18 个** |
 
 ---
 
@@ -65,7 +65,7 @@ ao compose "帮我写一篇关于 AI Agent 的深度分析文章" --run
 
 ### 方式一：一键安装到你的 AI 工具
 
-支持 **16 种主流 AI 编程工具**，一条命令搞定：
+支持 **17 种主流 AI 编程工具**，一条命令搞定：
 
 ```bash
 # 自动检测已安装的工具，一键安装
@@ -88,6 +88,7 @@ ao compose "帮我写一篇关于 AI Agent 的深度分析文章" --run
 ./scripts/install.sh --tool deerflow       # DeerFlow 2.0 (ByteDance)
 ./scripts/install.sh --tool workbuddy      # WorkBuddy (Tencent)
 ./scripts/install.sh --tool hermes         # Hermes Agent (NousResearch)
+./scripts/install.sh --tool qoder          # Qoder
 ```
 
 > Claude Code 和 GitHub Copilot 可直接安装；其他工具需先运行 `./scripts/convert.sh` 转换格式。
@@ -490,7 +491,7 @@ cp -r marketing/*.md ~/.claude/agents/
 
 ## 工具集成
 
-支持 **16 种主流 AI 编程工具**，通过 `scripts/` 目录下的脚本实现格式转换和一键安装。
+支持 **17 种主流 AI 编程工具**，通过 `scripts/` 目录下的脚本实现格式转换和一键安装。
 
 ### 支持的工具
 
@@ -512,6 +513,7 @@ cp -r marketing/*.md ~/.claude/agents/
 | **WorkBuddy** (腾讯) | `~/.workbuddy/skills/` | 全局，需转换 |
 | **Hermes Agent** (NousResearch) | `~/.hermes/skills/` | 全局，需转换 |
 | **DeerFlow 2.0** (字节跳动) | `skills/custom/` | 项目级，需转换 |
+| **Qoder** | `~/.qoder/agents/` 或 `.qoder/agents/` | 全局/项目级，需转换 |
 
 ### 使用方法
 
@@ -815,6 +817,23 @@ DEERFLOW_SKILLS_DIR=/path/to/deerflow/skills/custom ./scripts/install.sh --tool 
 ```
 
 安装后在 DeerFlow 的任务中，相关技能会自动加载。
+</details>
+
+<details>
+<summary><strong>Qoder</strong></summary>
+
+转换为 Qoder SubAgent 格式（Markdown + YAML frontmatter）并安装到 `~/.qoder/agents/`（全局）或项目目录 `.qoder/agents/`。
+
+```bash
+./scripts/convert.sh --tool qoder
+./scripts/install.sh --tool qoder
+```
+
+在 Qoder 中使用：
+- **自动触发**：用自然语言描述任务，Qoder 根据 description 自动选择智能体
+- **手动触发**：输入 `/agent-name`（如 `/engineering-frontend-developer`）
+
+> 官方文档：https://docs.qoder.com/zh/extensions/subagent
 </details>
 
 ### 修改智能体后重新生成

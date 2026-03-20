@@ -14,7 +14,7 @@
 
 | 🤖 AI 智能體 | 🌏 英文版翻譯 | 🇨🇳 中國市場原創 | 🧠 支援工具 | 🏢 部門 |
 |:---:|:---:|:---:|:---:|:---:|
-| **193** | **147** | **46** | **16 種** | **18 個** |
+| **193** | **147** | **46** | **17 種** | **18 個** |
 
 ---
 
@@ -28,7 +28,7 @@
 
 ### 方式一：一鍵安裝到你的 AI 工具
 
-支援 **16 種主流 AI 程式設計工具**，一條命令搞定：
+支援 **17 種主流 AI 程式設計工具**，一條命令搞定：
 
 ```bash
 # 自動檢測已安裝的工具，一鍵安裝
@@ -51,6 +51,7 @@
 ./scripts/install.sh --tool deerflow       # DeerFlow 2.0 (ByteDance)
 ./scripts/install.sh --tool workbuddy      # WorkBuddy (Tencent)
 ./scripts/install.sh --tool hermes         # Hermes Agent (NousResearch)
+./scripts/install.sh --tool qoder          # Qoder
 ```
 
 > Claude Code 和 GitHub Copilot 可直接安裝；其他工具需先執行 `./scripts/convert.sh` 轉換格式。
@@ -442,7 +443,7 @@ cp -r marketing/*.md ~/.claude/agents/
 
 ## 工具整合
 
-支援 **16 種主流 AI 程式設計工具**，透過 `scripts/` 目錄下的指令碼實現格式轉換和一鍵安裝。
+支援 **17 種主流 AI 程式設計工具**，透過 `scripts/` 目錄下的指令碼實現格式轉換和一鍵安裝。
 
 ### 支援的工具
 
@@ -464,6 +465,7 @@ cp -r marketing/*.md ~/.claude/agents/
 | **WorkBuddy** (騰訊) | `~/.workbuddy/skills/` | 全局，需轉換 |
 | **Hermes Agent** (NousResearch) | `~/.hermes/skills/` | 全局，需轉換 |
 | **DeerFlow 2.0** (位元組跳動) | `skills/custom/` | 專案級，需轉換 |
+| **Qoder** | `~/.qoder/agents/` 或 `.qoder/agents/` | 全域/專案級，需轉換 |
 
 ### 使用方法
 
@@ -749,6 +751,23 @@ DEERFLOW_SKILLS_DIR=/path/to/deerflow/skills/custom ./scripts/install.sh --tool 
 ```
 
 安裝後在 DeerFlow 的任務中，相關技能會自動載入。
+</details>
+
+<details>
+<summary><strong>Qoder</strong></summary>
+
+轉換為 Qoder SubAgent 格式（Markdown + YAML frontmatter）並安裝到 `~/.qoder/agents/`（全域）或專案目錄 `.qoder/agents/`。
+
+```bash
+./scripts/convert.sh --tool qoder
+./scripts/install.sh --tool qoder
+```
+
+在 Qoder 中使用：
+- **自動觸發**：用自然語言描述任務，Qoder 根據 description 自動選擇智能體
+- **手動觸發**：輸入 `/agent-name`（如 `/engineering-frontend-developer`）
+
+> 官方文件：https://docs.qoder.com/zh/extensions/subagent
 </details>
 
 ### 修改智能體後重新生成
